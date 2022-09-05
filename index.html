@@ -2,21 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <div class="alert-box" id="alert"><p>Basic</p> <button id="close" onclick="alert('alert', 'none')">X</button></div>    
-    <button id="button" onclick="alert('alert', 'block', 'Basic')">Basic</button>
-    <button id="button" onclick="alert('alert', 'block', 'ID')">ID</button>
-    <button id="button" onclick="alert('alert', 'block', 'PW')">PW</button>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>Login</h4>
+        <form action="success.html">
+          <div class="alert-box">Wrong ID</div>
+          <div class="my-3">
+            <input type="text" class="form-control" placeholder="Type your ID" id="userID" />
+          </div>
+          <div class="my-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Type your password"
+              id="userPW"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+          <button type="button" class="btn btn-danger" id="close">Close</button>
+        </form>
+      </div>
+    </div>
 
-    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-primary" id="login-button">Login</button>
+
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <div class="list-group-container">
+      <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
     <script>
-      function alert(elementId, property, msg) {
-        document.getElementById(elementId).style.display = property;
-        document.getElementById(elementId).getElementsByTagName('p')[0].innerText = msg;
-      }
+      $("#login-button").on("click", function () {
+        $(".black-bg").fadeIn();
+      });
+
+      $("#close").on("click", function () {
+        $(".black-bg").fadeOut();
+      });
+
+      $("#submit-button").on("click", function (e) {
+        console.log($("#userID").val());
+
+        let inputID = $("#userID").val();
+        let inputPW = $("#userPW").val();
+        document.querySelector("form").reset();
+        if (inputID === "") {
+          alert("Please provide user ID!");
+          e.preventDefault();
+        } else if (inputPW === "") {
+          alert("Please provide user PW");
+          e.preventDefault();
+        } else if (inputPW.length < 6) {
+          alert("Password is too short!");
+          e.preventDefault();
+        } else {
+          console.log("login successful");
+        }
+      });
+
+      document.getElementsByClassName("navbar-toggler")[0].addEventListener("click", () => {
+        document.getElementsByClassName("list-group-container")[0].classList.toggle("show");
+      });
     </script>
   </body>
 </html>
