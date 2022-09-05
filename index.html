@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="alert-box" id="alert">box1 <button id="close" onclick="hideAlert()">X</button></div>
-    <button id="button" onclick="displayAlert()">Click to Alert</button>
+    <div class="alert-box" id="alert"><p>Basic</p> <button id="close" onclick="alert('alert', 'none')">X</button></div>    
+    <button id="button" onclick="alert('alert', 'block', 'Basic')">Basic</button>
+    <button id="button" onclick="alert('alert', 'block', 'ID')">ID</button>
+    <button id="button" onclick="alert('alert', 'block', 'PW')">PW</button>
+
+    <button type="button" class="btn btn-primary">Primary</button>
     <script>
-      function hideAlert() {
-        document.getElementById("alert").style.display = "none";
-      }
-      function displayAlert() {
-        document.getElementById("alert").style.display = "block";
+      function alert(elementId, property, msg) {
+        document.getElementById(elementId).style.display = property;
+        document.getElementById(elementId).getElementsByTagName('p')[0].innerText = msg;
       }
     </script>
   </body>
