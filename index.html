@@ -43,6 +43,10 @@
 
     <button type="button" class="btn btn-primary" id="login-button">Login</button>
 
+    <span class="badge bg-dark">Dark 🔄</span>
+
+    <p id="test-dark-mode">Dark Mode Test</p>
+
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
@@ -61,12 +65,48 @@
       </ul>
     </div>
 
+    <div class="alert alert-danger">5초 이내 구매시 사은품 증정!</div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
     <script>
+      let seconds = 5;
+      setInterval(function () {
+        $(".alert").html(`${seconds}초 이내 구매시 사은품 증정!`);
+        if (seconds === 0) {
+          $(".alert").hide();
+        }
+        seconds -= 1;
+      }, 1000);
+
+      let count = 0;
+      $(".badge").on("click", function () {
+        console.log("dark mode clicked");
+        console.log("count: ", count);
+        if (count % 2 == 0) {
+          // remain light
+          // $("#test-dark-mode").css("color", "red");
+          $(".badge").addClass("bg-light");
+          $(".badge").removeClass("bg-dark");
+          $(".badge").text("Light 🔄");
+          $(".badge").css("color", "black");
+          // $(".badge").css("cursor", "pointer");
+        } else {
+          // change to dark
+          // $("#test-dark-mode").css("color", "black");
+          $(".badge").addClass("bg-dark");
+          $(".badge").removeClass("bg-light");
+          $(".badge").text("Dark 🔄");
+          $(".badge").css("color", "white");
+          // $(".badge").css("cursor", "pointer");
+        }
+
+        count += 1;
+      });
+
       $("#login-button").on("click", function () {
         $(".black-bg").fadeIn();
       });
@@ -78,13 +118,15 @@
       $("#submit-button").on("click", function (e) {
         console.log($("#userID").val());
 
+        document.getElementById("userID").addEventListener("input", function () {});
+
         let inputID = $("#userID").val();
         let inputPW = $("#userPW").val();
         document.querySelector("form").reset();
         if (inputID === "") {
           alert("Please provide user ID!");
           e.preventDefault();
-        } else if (inputPW === "") {
+        } else if (inputPW === "" || !(/[A-Z]/.test(inputPW))) {
           alert("Please provide user PW");
           e.preventDefault();
         } else if (inputPW.length < 6) {
@@ -98,6 +140,40 @@
       document.getElementsByClassName("navbar-toggler")[0].addEventListener("click", () => {
         document.getElementsByClassName("list-group-container")[0].classList.toggle("show");
       });
+
+      function 삼육구게임(num) {
+        if (num % 10 === 3 || num % 10 === 6 || num % 10 === 9) {
+          console.log("응용 박수");
+        } else if (num % 9 === 0) {
+          console.log("박수x2");
+        } else if (num % 3 === 0) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+
+      // 삼육구게임(6);
+      // 삼육구게임(13);
+      // 삼육구게임(9);
+
+      function 합격했냐(a, b) {
+        if (a < 0 || a > 100 || b < 0 || b > 100) alert("no joking!");
+        else if (a < 40 || b < 40) {
+          console.log("fail");
+          return "fail";
+        } else if (a + b >= 120) {
+          console.log("pass");
+          return "합격";
+        } else {
+          console.log("fail");
+          return "fail";
+        }
+      }
+
+      // 합격했냐(70, 70);
+      // 합격했냐(30, 100);
+      // 합격했냐(150, 50);
     </script>
   </body>
 </html>
